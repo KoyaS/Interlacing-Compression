@@ -1,4 +1,5 @@
 from PIL import Image
+import time
 
 """This program runs a compression algorithm on given input image. This is lossy compression.
     The programwill first break a photo into horizontal stripes and take out half. Then it will concatinate the 
@@ -7,9 +8,9 @@ from PIL import Image
     NOTE: this is only true if keep_origional_dimensions is True. Otherwise the image's dimensions will be halved
     for each iteration in compression_iterations"""
 
-compression_iterations = 10
-keep_origional_dimensions = True
-img_source = 'images/nasaImg.jpg'
+compression_iterations = 3
+keep_origional_dimensions = False
+img_source = 'images/mouse.jpg'
 
 def halfRedux(im):
     width, height = im.size
@@ -37,6 +38,7 @@ def halfRedux(im):
     return(horiz_im, orig_dimens)
 
 # Start Compression
+t0 = time.time() # Get start time
 im = Image.open(img_source)
 print('Origional Dimensions:', im.size)
 
@@ -47,8 +49,10 @@ for i in range(1,compression_iterations):
     else:
         newImg, orig_dimens = halfRedux(newImg)
 
+
 if keep_origional_dimensions:
     orig_dimens.save('interlaced', format='JPEG')
 else:
     newImg.save('interlaced', format='JPEG')
     print('New Dimensions:', newImg.size)
+print( time.time() - t0 )
