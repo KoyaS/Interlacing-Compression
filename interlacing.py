@@ -8,9 +8,9 @@ import time
     NOTE: this is only true if keep_origional_dimensions is True. Otherwise the image's dimensions will be halved
     for each iteration in compression_iterations"""
 
-compression_iterations = 3
-keep_origional_dimensions = False
-img_source = 'images/mouse.jpg'
+compression_iterations = 8
+keep_origional_dimensions = True
+img_source = 'images/nasaImg.jpg'
 
 def halfRedux(im):
     width, height = im.size
